@@ -1,0 +1,42 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+
+int main()
+{
+    // width of the building.
+    int W;
+    // height of the building.
+    int H;
+    scanf("%d%d", &W, &H);
+    // maximum number of turns before game over.
+    int N;
+    scanf("%d", &N);
+    int batmanX;
+    int batmanY;
+    scanf("%d%d", &batmanX, &batmanY);
+    int cutX = 0;
+    int cutY = 0;
+    // game loop
+    while (1) {
+        char bomb_dir[4] = "";
+        scanf("%s", bomb_dir);
+        H = (strstr(bomb_dir, "U"))?batmanY:H;
+        batmanY = (strstr(bomb_dir, "U"))?(cutY+batmanY)/2:batmanY;
+        cutY = (strstr(bomb_dir, "D"))?batmanY:cutY;
+        batmanY = (strstr(bomb_dir, "D"))?(H+batmanY)/2:batmanY;
+        cutX = (strstr(bomb_dir, "R"))?batmanX:cutX;
+        batmanX = (strstr(bomb_dir, "R"))?(W+batmanX)/2:batmanX;
+        W = (strstr(bomb_dir, "L"))?batmanX:W;
+        batmanX = (strstr(bomb_dir, "L"))?(cutX+batmanX)/2:batmanX;
+        printf("%d%s%d\n", batmanX, " ", batmanY);
+    }
+
+    return 0;
+}
